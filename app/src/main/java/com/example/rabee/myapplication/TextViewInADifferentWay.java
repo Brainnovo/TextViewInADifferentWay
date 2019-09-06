@@ -20,7 +20,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.core.view.ViewCompat;
 
-@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public class TextViewInADifferentWay {
 
     private final String TAG = TextViewInADifferentWay.class.getSimpleName();
