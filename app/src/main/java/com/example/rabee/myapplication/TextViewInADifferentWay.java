@@ -85,6 +85,7 @@ public class TextViewInADifferentWay {
                     context));
             tv_variable_plus.setTextColor(tv_variable.getCurrentTextColor());
             tv_variable_plus.setTypeface(null, Typeface.BOLD);
+            tv_variable_plus.setIncludeFontPadding(false);
             tv_variable_plus.setLayoutParams(params);
             this.cl.addView(tv_variable_plus);
 
