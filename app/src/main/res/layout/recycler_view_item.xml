@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:id="@+id/tv"
+        android:gravity="center"
+        android:textColor="@android:color/white"
         android:background="@color/colorPrimary"
         android:text="Item">
     </TextView>
@@ -32,6 +34,8 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:id="@+id/tv1"
+        android:gravity="center"
+        android:textColor="@android:color/white"
         android:background="@color/colorPrimaryDark"
         android:text="Item">
     </TextView>
