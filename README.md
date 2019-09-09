@@ -1,6 +1,6 @@
 # TextViewInADifferentWay
 
-Make a TextView (to the right) text continue below another TextView (to the left) if it is currently displaying multiple lines.
+Make a **TextView (to the right)** continue below another **TextView (to the left)** if it is currently displaying multiple lines.
 
 ![](output.gif)
 
