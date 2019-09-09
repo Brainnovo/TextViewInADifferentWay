@@ -4,4 +4,9 @@ Make a TextView (to the right) continue below another TextView (to the left) if 
 
 # Output
 
-![](output.gif)  
+![](output.gif)
+
+# Different Calculation Modes
+
+![](different_calculation_modes.gif)
+
