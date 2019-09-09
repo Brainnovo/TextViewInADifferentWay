@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_variable"
-        android:text="Hello World World Hello" />
+        android:text="Hello. Who are you>" />
 
     <TextView
         android:id="@+id/tv_variable"
@@ -37,6 +37,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_fixed"
-        android:text="Hello World Hello World Hello World" />
+        android:text="Hello, My name is Rabee, I'm 25 years old. I work at blaaBlaa. I love
+nature. My favorite sport is basket ball." />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

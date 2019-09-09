@@ -23,14 +23,35 @@ import androidx.core.view.ViewCompat;
 public class TextViewInADifferentWay {
 
     private final String TAG = TextViewInADifferentWay.class.getSimpleName();
+    private Context context;
     private ConstraintLayout cl;
     private TextView tv_fixed = null;
     private TextView tv_variable = null;
     private TextView tv_variable_plus = null;
     private String text = "";
+    public static final int CALCULATION_MODE_SINGLE_LINE = 0;
+    public static final int CALCULATION_MODE_LINES_TOTAL_HEIGHT = 1;
+    private int calculationMode = CALCULATION_MODE_LINES_TOTAL_HEIGHT;
 
     public TextViewInADifferentWay(@NonNull Context context,
                                    @NonNull View layout) {
+        this(context, layout, CALCULATION_MODE_LINES_TOTAL_HEIGHT);
+    }
+
+    public TextViewInADifferentWay(@NonNull Context context,
+                                   @NonNull View layout,
+                                   int calculationMode) {
+
+        this.context = context;
+        if(calculationMode == CALCULATION_MODE_SINGLE_LINE ||
+                calculationMode == CALCULATION_MODE_LINES_TOTAL_HEIGHT){
+            this.calculationMode = calculationMode;
+        }
+        setUpLayout(context, layout);
+    }
+
+    private void setUpLayout(Context context, View layout) {
+
         if (layout instanceof ConstraintLayout) {
             this.cl = (ConstraintLayout) layout;
             if (this.cl.getChildCount() == 2) {
@@ -115,7 +136,14 @@ public class TextViewInADifferentWay {
         return px / ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
-    private void calculate() {
+    public void calculate() {
+
+        //TODO: Clone as much attribute from base textView (tv_variable)
+        tv_variable_plus.setTextSize(convertPixelsToDp(tv_variable.getTextSize(),
+                context));
+        tv_variable_plus.setTextColor(tv_variable.getCurrentTextColor());
+        tv_variable_plus.setTypeface(null, Typeface.BOLD);
+        tv_variable_plus.setIncludeFontPadding(false);
 
         int cTotalCharWidth = 0;
         int cLineCounter = 1;
@@ -131,10 +159,17 @@ public class TextViewInADifferentWay {
             if (cTotalCharWidth >= (tv_variable.getWidth() -
                     tv_variable.getPaddingLeft() - tv_variable.getPaddingRight())) {
                 //Log.i(TAG, "New Line after " + c + " (" + i + ")");
-                cTotalCharWidth = 0;
-                if (((2 * cLineCounter) * cLineHeight) >= (tAllLineHeight)) {
-                    index = i;
-                    break;
+                if (calculationMode == CALCULATION_MODE_LINES_TOTAL_HEIGHT) {
+                    cTotalCharWidth = 0;
+                    if (((2 * cLineCounter) * cLineHeight) >= (tAllLineHeight)) {
+                        index = i;
+                        break;
+                    }
+                } else if (calculationMode == CALCULATION_MODE_SINGLE_LINE) {
+                    if (cLineCounter == 1) {
+                        index = i;
+                        break;
+                    }
                 }
                 cLineCounter += 1;
             }
@@ -168,8 +203,17 @@ public class TextViewInADifferentWay {
         return this.tv_variable_plus;
     }
 
+    public TextViewInADifferentWay setCalculationMode(int calculationMode) {
+        if (calculationMode == CALCULATION_MODE_SINGLE_LINE ||
+                calculationMode == CALCULATION_MODE_LINES_TOTAL_HEIGHT) {
+            if (calculationMode != this.calculationMode) {
+                calculate();
+            }
+        }
+        return TextViewInADifferentWay.this;
+    }
 
-    public void setText(String text1, String text) {
+    public TextViewInADifferentWay setText(String text1, String text) {
         this.text = text;
         tv_fixed.setText(text1);
         tv_variable.setText(text);
@@ -188,6 +232,7 @@ public class TextViewInADifferentWay {
                 }
             });
         }
+        return TextViewInADifferentWay.this;
     }
 
     public String getText() {
